@@ -15,7 +15,7 @@ Set BorderRadius 8
 
 Set TypingSpeed 100ms
 
-Type "go run ." Sleep 200ms
+Type "go run ." Sleep 500ms
 Hide
 Backspace 30
 Type "go run ." Enter
