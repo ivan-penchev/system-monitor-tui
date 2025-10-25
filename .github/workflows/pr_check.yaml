@@ -27,7 +27,7 @@ jobs:
         run: go build .
       
       - name: Testing
-        run: make test
+        run: go test -v ./...
       
       - name: Check Go mod tidy
         run: |
