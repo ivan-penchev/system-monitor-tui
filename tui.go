@@ -196,9 +196,21 @@ func (m model) viewHeader() string {
 		return fmt.Sprintf("%s %s", listItemKey(key), listItemValue)
 	}
 
+	var lastUpdate string
+	if m.lastUpdate.IsZero() {
+		lastUpdate = "updating..."
+	} else {
+		duration := time.Since(m.lastUpdate)
+		if duration < time.Second {
+			lastUpdate = fmt.Sprintf("%dms ago", duration.Milliseconds())
+		} else {
+			lastUpdate = fmt.Sprintf("%.1fs ago", duration.Seconds())
+		}
+	}
+
 	return m.viewStyle.Render(
 		lipgloss.JoinVertical(lipgloss.Top,
-			fmt.Sprintf("Last update: %d milliseconds ago\n", time.Now().Sub(m.lastUpdate).Milliseconds()),
+			fmt.Sprintf("Last update: %s\n", lastUpdate),
 			lipgloss.JoinHorizontal(lipgloss.Top,
 				// Progress Bars
 				list.Render(
